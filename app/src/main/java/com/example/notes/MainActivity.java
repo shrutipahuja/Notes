@@ -11,7 +11,7 @@ import android.os.Bundle;
  */
 
 public class MainActivity extends AppCompatActivity {
-    Toolbar notesListToolbar;
+//    Toolbar notesListToolbar;
     RecyclerView notesListRecyclerView;
 
     @Override
@@ -19,8 +19,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        notesListToolbar = findViewById(R.id.notesListToolbar);
-        setSupportActionBar(notesListToolbar);
+//        notesListToolbar = findViewById(R.id.notesListToolbar);
+//        setSupportActionBar(notesListToolbar);
 
         notesListRecyclerView = findViewById(R.id.notesListRecyclerView);
 
