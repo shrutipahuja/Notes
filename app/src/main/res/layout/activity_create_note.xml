@@ -69,6 +69,7 @@
         android:layout_height="wrap_content"
         android:text="Save Note"
         android:layout_margin="20dp"
+        android:onClick="saveNote"
         android:textColor="@android:color/white"
         android:background="@drawable/background_rounded_button"
         android:backgroundTint="@color/colorPrimary"

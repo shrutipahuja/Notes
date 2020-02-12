@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import java.util.Calendar;
 
@@ -19,7 +20,7 @@ public class CreateNoteActivity extends AppCompatActivity {
 
     EditText noteTitleEditText, noteContentEditText;
     Calendar calendar;
-    String currentDate, currentTime;
+    String currentDate, currentTime, noteTitle, noteContent;
     Button saveButton;
 
     @Override
@@ -34,28 +35,21 @@ public class CreateNoteActivity extends AppCompatActivity {
         saveButton = findViewById(R.id.saveButton);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        noteTitle = noteTitleEditText.getText().toString();
+        noteContent = noteContentEditText.getText().toString();
+
         //get current year, month, date
         calendar = Calendar.getInstance();
         currentDate = calendar.get(Calendar.YEAR) + "/" + (calendar.get(Calendar.MONTH) + 1) + "/" + calendar.get(Calendar.DAY_OF_MONTH);
         currentTime = padding(calendar.get(Calendar.HOUR_OF_DAY)) + ":" + padding(calendar.get(Calendar.MINUTE));
 
         //Log.i("DATE AND TIME", currentDate + "   " + currentTime);
-
-        saveButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Log.i("Button pressed", "Save Button");
-            }
-        });
-
-
     }
 
     /**
      * Adds a zero before the minute or hour if less than 10
      * @param time int
      */
-
     private String padding(int time) {
         if(time < 10)
             return "0" + time;
@@ -63,4 +57,30 @@ public class CreateNoteActivity extends AppCompatActivity {
             return String.valueOf(time);
     }
 
+    /**
+     * Saves note created to NoteDatabase
+     * @param view View
+     */
+
+    public void saveNote(View view) {
+        if(noteTitle!=null && noteContent!=null) {
+            Note note = new Note(noteTitle, noteContent, currentDate, currentTime);
+            NotesDatabase notesDatabase = new NotesDatabase(this);
+            notesDatabase.addNoteToDatabase(note);
+            Log.i("Button pressed", "Save Button");
+            saveButton.setEnabled(true);
+        } else if (noteTitle==null) {
+            saveButton.setEnabled(false);
+            Toast.makeText(this, "Note Title cannot be empty", Toast.LENGTH_LONG).show();
+        } else if (noteContent==null) {
+            saveButton.setEnabled(false);
+            Toast.makeText(this, "Note Title cannot be empty", Toast.LENGTH_LONG).show();
+        }
+        onBackPressed();
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+    }
 }

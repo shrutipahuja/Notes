@@ -1,8 +1,14 @@
 package com.example.notes;
 
+import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Class to create and upgrade SQLiteDatabase
@@ -68,6 +74,53 @@ public class NotesDatabase extends SQLiteOpenHelper {
             return;
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + DATABASE_TABLE);
         onCreate(sqLiteDatabase);
+
+    }
+
+    public long addNoteToDatabase(Note note) {
+        SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(KEY_TITLE, note.getTitle());
+        contentValues.put(KEY_CONTENT, note.getContent());
+        contentValues.put(KEY_DATE, note.getDate());
+        contentValues.put(KEY_TIME, note.getTime());
+
+        long ID = sqLiteDatabase.insert(DATABASE_TABLE, null, contentValues);
+        Log.d("Inserted",String.valueOf(ID));
+        return ID;
+    }
+
+    public  Note getNote(long id) {
+        //select * from DATABASE_NAME where id =
+        SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
+        Cursor cursor = sqLiteDatabase.query(DATABASE_TABLE, new String[] { KEY_ID, KEY_TITLE, KEY_CONTENT, KEY_DATE, KEY_TIME},
+                KEY_ID + "=?", new String[]{String.valueOf(id)}, null, null, null);
+        if(cursor != null)
+            cursor.moveToFirst();
+
+        return new Note(cursor.getLong(0), cursor.getString(1), cursor.getString(2),
+                cursor.getString(3), cursor.getString(4));
+
+    }
+
+    public List<Note> getNotes() {
+        SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
+        List<Note> listOfNotes = new ArrayList<>();
+        //select * from DATABASE_NAME
+
+        String query = "SELECT * FROM " + DATABASE_TABLE;
+        Cursor cursor = sqLiteDatabase.rawQuery(query, null);
+        if(cursor!=null) {
+            do {
+                Note note = new Note();
+                note.setId(cursor.getLong(0));
+                note.setTitle(cursor.getString(1));
+                note.setContent(cursor.getString(2));
+                note.setDate(cursor.getString(3));
+                note.setTime(cursor.getString(4));
+            }while(cursor.moveToNext());
+        }
+                return listOfNotes;
 
     }
 }
