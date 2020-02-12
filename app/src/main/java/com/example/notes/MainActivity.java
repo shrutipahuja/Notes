@@ -4,7 +4,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Toast;
 
 /**
  * Screen 1 - List Notes Screen displaying list of notes
@@ -25,5 +28,10 @@ public class MainActivity extends AppCompatActivity {
         notesListRecyclerView = findViewById(R.id.notesListRecyclerView);
 
 
+    }
+
+    public void createNote(View view) {
+        Intent showCreateNoteScreen = new Intent(this, CreateNoteActivity.class);
+        startActivity(showCreateNoteScreen);
     }
 }

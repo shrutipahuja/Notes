@@ -4,14 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#CDD3D5"
     tools:context=".CreateNoteActivity">
 
     <TextView
         android:id="@+id/createNoteHeading"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Create A New Note Below:"
+        android:text="Time for a new note!"
         android:textColor="#393E41"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
@@ -55,7 +54,7 @@
     <EditText
         android:id="@+id/noteContentEditText"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="100dp"
         android:layout_margin="10dp"
         android:inputType="textMultiLine"
         android:textSize="16sp"
@@ -65,12 +64,13 @@
         />
 
     <Button
+        android:id="@+id/saveButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Save Note"
         android:layout_margin="20dp"
         android:textColor="@android:color/white"
-        android:background="@drawable/background_rounded"
+        android:background="@drawable/background_rounded_button"
         android:backgroundTint="@color/colorPrimary"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
