@@ -12,7 +12,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
 
 /**
  * Screen 2 - Create Note Screen allowing to create a new note
@@ -23,6 +26,7 @@ public class CreateNoteActivity extends AppCompatActivity {
     Calendar calendar;
     String currentDate, currentTime, noteTitle, noteContent;
     Button saveButton;
+    long id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,20 +41,12 @@ public class CreateNoteActivity extends AppCompatActivity {
 
         //get current year, month, date
         calendar = Calendar.getInstance();
-        currentDate = calendar.get(Calendar.YEAR) + "/" + (calendar.get(Calendar.MONTH) + 1) + "/" + calendar.get(Calendar.DAY_OF_MONTH);
-        currentTime = padding(calendar.get(Calendar.HOUR_OF_DAY)) + ":" + padding(calendar.get(Calendar.MINUTE));
+        SimpleDateFormat simpleTimeFormat = new SimpleDateFormat("hh:mm a", Locale.US);
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("d MMMM yyyy", Locale.US);
+        currentTime = simpleTimeFormat.format(calendar.getTime());
+        currentDate = simpleDateFormat.format(calendar.getTime());
     }
 
-    /**
-     * Adds a zero before the minute or hour if less than 10
-     * @param time int
-     */
-    private String padding(int time) {
-        if(time < 10)
-            return "0" + time;
-        else
-            return String.valueOf(time);
-    }
 
     /**
      * Saves note created to NoteDatabase
@@ -68,14 +64,16 @@ public class CreateNoteActivity extends AppCompatActivity {
         } else {
             Note note = new Note(noteTitle, noteContent, currentDate, currentTime);
             NotesDatabase notesDatabase = new NotesDatabase(this);
-            long id = notesDatabase.addNoteToDatabase(note);
+            id = notesDatabase.addNoteToDatabase(note);
+            Note noteCreated = notesDatabase.getNote(id);
             Log.i("Button pressed", "Save Button");
             goToMain();
         }
     }
 
     private void goToMain() {
-        Intent goToMainIntent = new Intent(this, MainActivity.class);
+        Intent goToMainIntent = new Intent(this, NoteDetailsActivity.class);
+        goToMainIntent.putExtra("ID", id);
         startActivity(goToMainIntent);
     }
 

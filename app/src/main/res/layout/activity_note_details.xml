@@ -6,4 +6,48 @@
     android:layout_height="match_parent"
     tools:context=".NoteDetailsActivity">
 
+    <TextView
+        android:id="@+id/titleDetailsTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:text="Title"
+        android:layout_margin="10dp"
+        android:textColor="#393E41"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+
+    <TextView
+        android:id="@+id/contentDetailsTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:text="Content"
+        android:textColor="#393E41"
+        android:layout_margin="10dp"
+        app:layout_constraintTop_toBottomOf="@id/titleDetailsTextView"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <TextView
+        android:id="@+id/dateDetailsTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:text="Date"
+        android:layout_margin="10dp"
+        app:layout_constraintTop_toBottomOf="@id/contentDetailsTextView"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <TextView
+        android:id="@+id/timeDetailsTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:text="Time"
+        android:layout_margin="10dp"
+        app:layout_constraintTop_toBottomOf="@id/contentDetailsTextView"
+        app:layout_constraintStart_toEndOf="@id/dateDetailsTextView"/>
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>
