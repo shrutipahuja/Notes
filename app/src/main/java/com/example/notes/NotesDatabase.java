@@ -24,8 +24,8 @@ public class NotesDatabase extends SQLiteOpenHelper {
 
     //Initital Database Version, Database Name, Database Table
     private static int DATABASE_VERSION = 2;
-    private static final String DATABASE_NAME = "NotesDBMS";
-    private static final String DATABASE_TABLE = "NotesTableDBMS";
+    private static final String DATABASE_NAME = "Notes";
+    private static final String DATABASE_TABLE = "NotesTable";
 
     //Column Names for the Database Table NotesTable
     private static final String KEY_ID = "id";
@@ -46,16 +46,15 @@ public class NotesDatabase extends SQLiteOpenHelper {
      * Creates the database
      * @param sqLiteDatabase SQLiteDatabase
      */
-
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
         //CREATE TABLE TABLE_NAME(id INT PRIMARY KEY, title TEXT, content TEXT, data TEXT, time TEXT)
         String query = "CREATE TABLE " + DATABASE_TABLE + "(" +
-                        KEY_ID + " INT PRIMARY KEY" + ", " +
+                        KEY_ID + " INTEGER PRIMARY KEY" + ", " +
                         KEY_TITLE + " TEXT, " +
                         KEY_CONTENT  + " TEXT, " +
                         KEY_DATE + " TEXT, " +
-                        KEY_TIME + " TEXT)";
+                        KEY_TIME + " TEXT" +" )";
 
         sqLiteDatabase.execSQL(query);
 
@@ -93,12 +92,13 @@ public class NotesDatabase extends SQLiteOpenHelper {
     public Note getNote(long id) {
         //select * from DATABASE_NAME where id =
         SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
-        Cursor cursor = sqLiteDatabase.query(DATABASE_TABLE, new String[] { KEY_ID, KEY_TITLE, KEY_CONTENT, KEY_DATE, KEY_TIME},
+        String[] query = new String[] {KEY_ID, KEY_TITLE, KEY_CONTENT, KEY_DATE, KEY_TIME};
+        Cursor cursor = sqLiteDatabase.query(DATABASE_TABLE, query,
                 KEY_ID + "=?", new String[]{String.valueOf(id)}, null, null, null);
         if(cursor != null)
             cursor.moveToFirst();
 
-        return new Note(cursor.getLong(0), cursor.getString(1), cursor.getString(2),
+        return new Note(Long.parseLong(cursor.getString(0)), cursor.getString(1), cursor.getString(2),
                 cursor.getString(3), cursor.getString(4));
 
     }
@@ -113,7 +113,7 @@ public class NotesDatabase extends SQLiteOpenHelper {
         if(cursor.moveToFirst()) {
             do {
                 Note note = new Note();
-                note.setId(cursor.getLong(0));
+                note.setId(Long.parseLong(cursor.getString(0)));
                 note.setTitle(cursor.getString(1));
                 note.setContent(cursor.getString(2));
                 note.setDate(cursor.getString(3));
@@ -122,6 +122,5 @@ public class NotesDatabase extends SQLiteOpenHelper {
             }while(cursor.moveToNext());
         }
                 return listOfNotes;
-
     }
 }

@@ -68,7 +68,7 @@ public class CreateNoteActivity extends AppCompatActivity {
         } else {
             Note note = new Note(noteTitle, noteContent, currentDate, currentTime);
             NotesDatabase notesDatabase = new NotesDatabase(this);
-            notesDatabase.addNoteToDatabase(note);
+            long id = notesDatabase.addNoteToDatabase(note);
             Log.i("Button pressed", "Save Button");
             goToMain();
         }

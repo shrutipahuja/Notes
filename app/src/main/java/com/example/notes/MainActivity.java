@@ -32,9 +32,9 @@ public class MainActivity extends AppCompatActivity {
         NotesDatabase notesDatabase = new NotesDatabase(this);
         notes = notesDatabase.getNotes();
         notesListRecyclerView = findViewById(R.id.notesListRecyclerView);
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
-        linearLayoutManager.setReverseLayout(true);
-        notesListRecyclerView.setLayoutManager(linearLayoutManager);
+//        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+//        linearLayoutManager.setReverseLayout(true);
+        notesListRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         adapter = new NotesAdapter(this, notes );
         notesListRecyclerView.setAdapter(adapter);
 
