@@ -7,6 +7,10 @@ import android.os.Bundle;
 import android.widget.TextView;
 import android.widget.Toast;
 
+/**
+ * Screen 3 - Note Details Screen allowing to display the details of a note
+ */
+
 public class NoteDetailsActivity extends AppCompatActivity {
 
     TextView titleDetailsTextView, contentDetailsTextView, dateDetailsTextView, timeDetailsTextView;
@@ -18,7 +22,6 @@ public class NoteDetailsActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         Long id = intent.getLongExtra("ID", 0);
-        //Toast.makeText(this, String.valueOf(id), Toast.LENGTH_LONG).show();
 
         NotesDatabase notesDatabase = new NotesDatabase(this);
         Note note = notesDatabase.getNote(id);
@@ -29,11 +32,21 @@ public class NoteDetailsActivity extends AppCompatActivity {
         dateDetailsTextView = findViewById(R.id.dateDetailsTextView);
         timeDetailsTextView = findViewById(R.id.timeDetailsTextView);
 
+        //setting the text values of title, content, date and time
         titleDetailsTextView.setText(note.getTitle());
         contentDetailsTextView.setText(note.getContent());
         dateDetailsTextView.setText(note.getDate());
         timeDetailsTextView.setText(note.getTime());
 
+    }
 
+    /**
+     * Redirects to Screen1 on pressing back
+     */
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        startActivity(new Intent(this, MainActivity.class));
+        finish();
     }
 }

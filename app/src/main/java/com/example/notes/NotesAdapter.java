@@ -12,11 +12,20 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
+/**
+ * Adapter class for data binding to the recyclerview
+ */
+
 public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.NoteViewHolder> {
 
     LayoutInflater noteInflater;
     List<Note> notes;
 
+    /**
+     * Constructor for initialising the adapter
+     * @param context Context
+     * @param notes List<Note>
+     */
     NotesAdapter(Context context, List<Note> notes) {
         this.noteInflater = LayoutInflater.from(context);
         this.notes = notes;
@@ -30,6 +39,11 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.NoteViewHold
         return new NoteViewHolder(view);
     }
 
+    /**
+     * Binding the contents of the viewholder to the recyclerview
+     * @param holder NoteViewHolder
+     * @param position int
+     */
     @Override
     public void onBindViewHolder(@NonNull NoteViewHolder holder, int position) {
         String title = notes.get(position).getTitle();
@@ -43,11 +57,18 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.NoteViewHold
         holder.noteTime.setText(time);
     }
 
+    /**
+     * Returns the size of the list
+     * @return int
+     */
     @Override
     public int getItemCount() {
         return notes.size();
     }
 
+    /**
+     * ViewHolder class for each view item
+     */
     public class NoteViewHolder extends RecyclerView.ViewHolder {
         TextView noteTitle, noteContent, noteDate, noteTime;
 

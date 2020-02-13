@@ -2,11 +2,8 @@ package com.example.notes;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.ActionBar;
-import android.app.PendingIntent;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -14,7 +11,6 @@ import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.Locale;
 
 /**
@@ -35,11 +31,14 @@ public class CreateNoteActivity extends AppCompatActivity {
 
         noteTitleEditText = findViewById(R.id.noteTitleEditText);
         noteContentEditText = findViewById(R.id.noteContentEditText);
+
+
+
         saveButton = findViewById(R.id.saveButton);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
 
-        //get current year, month, date
+        //get current year, month, date, time and format them
         calendar = Calendar.getInstance();
         SimpleDateFormat simpleTimeFormat = new SimpleDateFormat("hh:mm a", Locale.US);
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("d MMMM yyyy", Locale.US);
@@ -52,7 +51,6 @@ public class CreateNoteActivity extends AppCompatActivity {
      * Saves note created to NoteDatabase
      * @param view View
      */
-
     public void saveNote(View view) {
         noteTitle = noteTitleEditText.getText().toString();
         noteContent = noteContentEditText.getText().toString();
@@ -66,12 +64,11 @@ public class CreateNoteActivity extends AppCompatActivity {
             NotesDatabase notesDatabase = new NotesDatabase(this);
             id = notesDatabase.addNoteToDatabase(note);
             Note noteCreated = notesDatabase.getNote(id);
-            Log.i("Button pressed", "Save Button");
-            goToMain();
+            goToDetailActivity();
         }
     }
 
-    private void goToMain() {
+    private void goToDetailActivity() {
         Intent goToMainIntent = new Intent(this, NoteDetailsActivity.class);
         goToMainIntent.putExtra("ID", id);
         startActivity(goToMainIntent);

@@ -5,7 +5,6 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,16 +15,10 @@ import java.util.List;
 
 public class NotesDatabase extends SQLiteOpenHelper {
 
-    //Database query constants
-    private static final String CREATE_TABLE = "CREATE TABLE";
-    private static final String INT_PRIMARY_INT = "INT PRIMARY INT";
-    private static final String TEXT = "TEXT";
-    private static final String DROP_TABLE_IF_EXISTS = "DROP TABLE IF EXISTS";
-
-    //Initital Database Version, Database Name, Database Table
+    //Initial Database Version, Database Name, Database Table
     private static int DATABASE_VERSION = 2;
-    private static final String DATABASE_NAME = "Notes";
-    private static final String DATABASE_TABLE = "NotesTable";
+    private static final String DATABASE_NAME = "NotesDatabase";
+    private static final String DATABASE_TABLE_NAME = "NotesTableDB";
 
     //Column Names for the Database Table NotesTable
     private static final String KEY_ID = "id";
@@ -49,7 +42,7 @@ public class NotesDatabase extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
         //CREATE TABLE TABLE_NAME(id INT PRIMARY KEY, title TEXT, content TEXT, data TEXT, time TEXT)
-        String query = "CREATE TABLE " + DATABASE_TABLE + "(" +
+        String query = "CREATE TABLE " + DATABASE_TABLE_NAME + "(" +
                         KEY_ID + " INTEGER PRIMARY KEY" + ", " +
                         KEY_TITLE + " TEXT, " +
                         KEY_CONTENT  + " TEXT, " +
@@ -71,10 +64,16 @@ public class NotesDatabase extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int oldVersion, int newVersion) {
         if(oldVersion >= newVersion)
             return;
-        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + DATABASE_TABLE);
+        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + DATABASE_TABLE_NAME);
         onCreate(sqLiteDatabase);
 
     }
+
+    /**
+     * Adds a new note entry to Notes Database
+     * @param note Note
+     * @return long id
+     */
 
     public long addNoteToDatabase(Note note) {
         SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
@@ -84,16 +83,21 @@ public class NotesDatabase extends SQLiteOpenHelper {
         contentValues.put(KEY_DATE, note.getDate());
         contentValues.put(KEY_TIME, note.getTime());
 
-        long ID = sqLiteDatabase.insert(DATABASE_TABLE, null, contentValues);
-        Log.d("Inserted",String.valueOf(ID));
+        long ID = sqLiteDatabase.insert(DATABASE_TABLE_NAME, null, contentValues);
         return ID;
     }
+
+    /**
+     * Obtain the note from the database
+     * @param id long
+     * @return Note
+     */
 
     public Note getNote(long id) {
         //select * from DATABASE_NAME where id =
         SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
         String[] query = new String[] {KEY_ID, KEY_TITLE, KEY_CONTENT, KEY_DATE, KEY_TIME};
-        Cursor cursor = sqLiteDatabase.query(DATABASE_TABLE, query,
+        Cursor cursor = sqLiteDatabase.query(DATABASE_TABLE_NAME, query,
                 KEY_ID + "=?", new String[]{String.valueOf(id)}, null, null, null);
         if(cursor != null)
             cursor.moveToFirst();
@@ -103,12 +107,17 @@ public class NotesDatabase extends SQLiteOpenHelper {
 
     }
 
+    /**
+     * Obtain the entire list of notes
+     * @return List<Note> listOfNotes
+     */
+
     public List<Note> getNotes() {
         SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
         List<Note> listOfNotes = new ArrayList<>();
         //select * from DATABASE_NAME
 
-        String query = "SELECT * FROM " + DATABASE_TABLE;
+        String query = "SELECT * FROM " + DATABASE_TABLE_NAME + " ORDER BY " + KEY_ID + " DESC";
         Cursor cursor = sqLiteDatabase.rawQuery(query, null);
         if(cursor.moveToFirst()) {
             do {

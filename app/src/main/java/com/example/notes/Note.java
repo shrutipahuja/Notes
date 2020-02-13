@@ -13,15 +13,31 @@ public class Note {
     private String time;
 
     public Note() {
-
+        //empty constructor
     }
 
+    /**
+     * Parametrized constructor for initialising Note
+     * @param title String
+     * @param content String
+     * @param date String
+     * @param time String
+     */
     public Note(String title, String content, String date, String time) {
         this.title = title;
         this.content = content;
         this.date = date;
         this.time = time;
     }
+
+    /**
+     * Parametrized constrcutor to initialise using id
+     * @param id long
+     * @param title String
+     * @param content String
+     * @param date String
+     * @param time String
+     */
 
     public Note(long id, String title, String content, String date, String time) {
         this.id = id;
@@ -32,6 +48,7 @@ public class Note {
     }
 
 
+    //getters and setters
     public long getId() {
         return id;
     }

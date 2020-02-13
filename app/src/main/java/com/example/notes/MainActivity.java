@@ -1,16 +1,12 @@
 package com.example.notes;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Adapter;
-import android.widget.ListView;
-import android.widget.Toast;
 
 import java.util.List;
 
@@ -21,7 +17,7 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
 //    Toolbar notesListToolbar;
     RecyclerView notesListRecyclerView;
-    NotesAdapter adapter;
+    NotesAdapter noteAdapter;
     List<Note> notes;
 
     @Override
@@ -32,13 +28,16 @@ public class MainActivity extends AppCompatActivity {
         NotesDatabase notesDatabase = new NotesDatabase(this);
         notes = notesDatabase.getNotes();
         notesListRecyclerView = findViewById(R.id.notesListRecyclerView);
-//        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
-//        linearLayoutManager.setReverseLayout(true);
         notesListRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        adapter = new NotesAdapter(this, notes );
-        notesListRecyclerView.setAdapter(adapter);
+        noteAdapter = new NotesAdapter(this, notes );
+        notesListRecyclerView.setAdapter(noteAdapter);
 
     }
+
+    /**
+     * onClick method for FAB on Notes List Screen
+     * @param view View
+     */
 
     public void createNote(View view) {
         Intent showCreateNoteScreen = new Intent(this, CreateNoteActivity.class);

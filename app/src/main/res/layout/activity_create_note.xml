@@ -58,6 +58,7 @@
         android:layout_margin="10dp"
         android:inputType="textMultiLine"
         android:textSize="16sp"
+        android:gravity="left"
         android:background="@drawable/background_rounded"
         app:layout_constraintTop_toBottomOf="@id/noteContentTextView"
         app:layout_constraintStart_toStartOf="parent"
