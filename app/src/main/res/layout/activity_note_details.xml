@@ -10,44 +10,40 @@
         android:id="@+id/titleDetailsTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="20sp"
-        android:text="Title"
-        android:layout_margin="10dp"
-        android:textColor="#393E41"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"/>
+        android:layout_margin="@dimen/dp_10"
+        android:textColor="@color/olive_grey"
+        android:textSize="@dimen/sp_20"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 
     <TextView
         android:id="@+id/contentDetailsTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="18sp"
-        android:text="Content"
-        android:textColor="#393E41"
-        android:layout_margin="10dp"
-        app:layout_constraintTop_toBottomOf="@id/titleDetailsTextView"
-        app:layout_constraintStart_toStartOf="parent"/>
+        android:layout_margin="@dimen/dp_10"
+        android:textColor="@color/olive_grey"
+        android:textSize="@dimen/sp_18"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/titleDetailsTextView" />
 
     <TextView
         android:id="@+id/dateDetailsTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="16sp"
-        android:text="Date"
-        android:layout_margin="10dp"
-        app:layout_constraintTop_toBottomOf="@id/contentDetailsTextView"
-        app:layout_constraintStart_toStartOf="parent"/>
+        android:layout_margin="@dimen/dp_10"
+        android:textSize="@dimen/sp_16"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/contentDetailsTextView" />
 
     <TextView
         android:id="@+id/timeDetailsTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="16sp"
-        android:text="Time"
-        android:layout_margin="10dp"
-        app:layout_constraintTop_toBottomOf="@id/contentDetailsTextView"
-        app:layout_constraintStart_toEndOf="@id/dateDetailsTextView"/>
+        android:layout_margin="@dimen/dp_10"
+        android:textSize="@dimen/sp_16"
+        app:layout_constraintStart_toEndOf="@id/dateDetailsTextView"
+        app:layout_constraintTop_toBottomOf="@id/contentDetailsTextView" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -6,25 +6,26 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
 import java.util.List;
 
 /**
- * Adapter class for data binding to the recyclerview
+ * Adapter class for data binding to the recycler view
  */
 
 public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.NoteViewHolder> {
 
-    LayoutInflater noteInflater;
-    List<Note> notes;
+    private final LayoutInflater noteInflater;
+    private final List<Note> notes;
 
     /**
      * Constructor for initialising the adapter
+     *
      * @param context Context
-     * @param notes List<Note>
+     * @param notes   List<Note>
      */
     NotesAdapter(Context context, List<Note> notes) {
         this.noteInflater = LayoutInflater.from(context);
@@ -40,8 +41,9 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.NoteViewHold
     }
 
     /**
-     * Binding the contents of the viewholder to the recyclerview
-     * @param holder NoteViewHolder
+     * Binding the contents of the view holder to the recycler view
+     *
+     * @param holder   NoteViewHolder
      * @param position int
      */
     @Override
@@ -59,6 +61,7 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.NoteViewHold
 
     /**
      * Returns the size of the list
+     *
      * @return int
      */
     @Override
@@ -69,10 +72,10 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.NoteViewHold
     /**
      * ViewHolder class for each view item
      */
-    public class NoteViewHolder extends RecyclerView.ViewHolder {
-        TextView noteTitle, noteContent, noteDate, noteTime;
+    class NoteViewHolder extends RecyclerView.ViewHolder {
+        final TextView noteTitle, noteContent, noteDate, noteTime;
 
-        public NoteViewHolder(@NonNull View itemView) {
+        NoteViewHolder(@NonNull View itemView) {
             super(itemView);
             noteTitle = itemView.findViewById(R.id.titleTextView);
             noteContent = itemView.findViewById(R.id.contentTextView);
@@ -82,9 +85,7 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.NoteViewHold
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                   // Toast.makeText(view.getContext(), "Click on note", Toast.LENGTH_LONG ).show();
                     Intent showDetailsIntent = new Intent(view.getContext(), NoteDetailsActivity.class);
-                    Toast.makeText(view.getContext(), String.valueOf(notes.get(getAdapterPosition()).getId()), Toast.LENGTH_LONG).show();
                     showDetailsIntent.putExtra("ID", notes.get(getAdapterPosition()).getId());
                     view.getContext().startActivity(showDetailsIntent);
                 }

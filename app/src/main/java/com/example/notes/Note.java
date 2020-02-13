@@ -1,10 +1,10 @@
 package com.example.notes;
 
 /**
- * POJO Class for inserting and retreiving of data variables from/to database
+ * POJO Class for inserting and retrieving of data variables from/to database
  */
 
-public class Note {
+class Note {
 
     private long id;
     private String title;
@@ -12,18 +12,19 @@ public class Note {
     private String date;
     private String time;
 
-    public Note() {
+    Note() {
         //empty constructor
     }
 
     /**
      * Parametrized constructor for initialising Note
-     * @param title String
+     *
+     * @param title   String
      * @param content String
-     * @param date String
-     * @param time String
+     * @param date    String
+     * @param time    String
      */
-    public Note(String title, String content, String date, String time) {
+    Note(String title, String content, String date, String time) {
         this.title = title;
         this.content = content;
         this.date = date;
@@ -31,15 +32,16 @@ public class Note {
     }
 
     /**
-     * Parametrized constrcutor to initialise using id
-     * @param id long
-     * @param title String
+     * Parametrized constructor to initialise using id
+     *
+     * @param id      long
+     * @param title   String
      * @param content String
-     * @param date String
-     * @param time String
+     * @param date    String
+     * @param time    String
      */
 
-    public Note(long id, String title, String content, String date, String time) {
+    Note(long id, String title, String content, String date, String time) {
         this.id = id;
         this.title = title;
         this.content = content;
@@ -57,11 +59,11 @@ public class Note {
         this.id = id;
     }
 
-    public String getTitle() {
+    String getTitle() {
         return title;
     }
 
-    public void setTitle(String title) {
+    void setTitle(String title) {
         this.title = title;
     }
 
@@ -73,19 +75,19 @@ public class Note {
         this.content = content;
     }
 
-    public String getDate() {
+    String getDate() {
         return date;
     }
 
-    public void setDate(String date) {
+    void setDate(String date) {
         this.date = date;
     }
 
-    public String getTime() {
+    String getTime() {
         return time;
     }
 
-    public void setTime(String time) {
+    void setTime(String time) {
         this.time = time;
     }
 }

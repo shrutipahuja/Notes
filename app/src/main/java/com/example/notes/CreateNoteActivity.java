@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -18,11 +17,9 @@ import java.util.Locale;
  */
 public class CreateNoteActivity extends AppCompatActivity {
 
-    EditText noteTitleEditText, noteContentEditText;
-    Calendar calendar;
-    String currentDate, currentTime, noteTitle, noteContent;
-    Button saveButton;
-    long id;
+    private EditText noteTitleEditText, noteContentEditText;
+    private String currentDate, currentTime;
+    private Long id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,14 +29,12 @@ public class CreateNoteActivity extends AppCompatActivity {
         noteTitleEditText = findViewById(R.id.noteTitleEditText);
         noteContentEditText = findViewById(R.id.noteContentEditText);
 
-
-
-        saveButton = findViewById(R.id.saveButton);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
 
         //get current year, month, date, time and format them
-        calendar = Calendar.getInstance();
+        Calendar calendar = Calendar.getInstance();
         SimpleDateFormat simpleTimeFormat = new SimpleDateFormat("hh:mm a", Locale.US);
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("d MMMM yyyy", Locale.US);
         currentTime = simpleTimeFormat.format(calendar.getTime());
@@ -49,13 +44,14 @@ public class CreateNoteActivity extends AppCompatActivity {
 
     /**
      * Saves note created to NoteDatabase
+     *
      * @param view View
      */
     public void saveNote(View view) {
-        noteTitle = noteTitleEditText.getText().toString();
-        noteContent = noteContentEditText.getText().toString();
+        String noteTitle = noteTitleEditText.getText().toString();
+        String noteContent = noteContentEditText.getText().toString();
 
-        if (noteTitle.isEmpty() ) {
+        if (noteTitle.isEmpty()) {
             Toast.makeText(this, "Title cannot be blank", Toast.LENGTH_LONG).show();
         } else if (noteContent.isEmpty()) {
             Toast.makeText(this, "Content cannot be blank", Toast.LENGTH_LONG).show();
@@ -63,7 +59,6 @@ public class CreateNoteActivity extends AppCompatActivity {
             Note note = new Note(noteTitle, noteContent, currentDate, currentTime);
             NotesDatabase notesDatabase = new NotesDatabase(this);
             id = notesDatabase.addNoteToDatabase(note);
-            Note noteCreated = notesDatabase.getNote(id);
             goToDetailActivity();
         }
     }
@@ -74,8 +69,5 @@ public class CreateNoteActivity extends AppCompatActivity {
         startActivity(goToMainIntent);
     }
 
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-    }
+
 }

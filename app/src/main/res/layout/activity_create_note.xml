@@ -10,73 +10,71 @@
         android:id="@+id/createNoteHeading"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Time for a new note!"
-        android:textColor="#393E41"
-        android:textSize="20sp"
+        android:layout_margin="@dimen/dp_10"
+        android:text="@string/time_for_a_new_note"
+        android:textColor="@color/olive_grey"
+        android:textSize="@dimen/sp_20"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_margin="10dp"
-         />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/noteTitleTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Enter the title:"
-        android:textColor="#393E41"
-        android:layout_margin="10dp"
-        android:textSize="18sp"
-        app:layout_constraintTop_toBottomOf="@id/createNoteHeading"
-        app:layout_constraintStart_toStartOf="parent"/>
+        android:layout_margin="@dimen/dp_10"
+        android:text="@string/enter_the_title"
+        android:textColor="@color/olive_grey"
+        android:textSize="@dimen/sp_18"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/createNoteHeading" />
 
     <EditText
         android:id="@+id/noteTitleEditText"
         android:layout_width="match_parent"
-        android:layout_height="30dp"
+        android:layout_height="@dimen/dp_30"
+        android:layout_margin="@dimen/dp_10"
         android:background="@drawable/background_rounded"
-        android:layout_margin="10dp"
-        android:textSize="18sp"
         android:maxLength="100"
-        app:layout_constraintTop_toBottomOf="@id/noteTitleTextView"
+        android:textSize="@dimen/sp_18"
         app:layout_constraintStart_toStartOf="parent"
-        />
+        app:layout_constraintTop_toBottomOf="@id/noteTitleTextView" />
+
     <TextView
         android:id="@+id/noteContentTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Enter the content:"
-        android:layout_margin="10dp"
-        android:textSize="18sp"
-        android:textColor="#393E41"
-        app:layout_constraintTop_toBottomOf="@id/noteTitleEditText"
-        app:layout_constraintStart_toStartOf="parent"/>
+        android:layout_margin="@dimen/dp_10"
+        android:text="@string/enter_the_content"
+        android:textColor="@color/olive_grey"
+        android:textSize="@dimen/sp_18"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/noteTitleEditText" />
 
     <EditText
         android:id="@+id/noteContentEditText"
         android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:layout_margin="10dp"
-        android:inputType="textMultiLine"
-        android:textSize="16sp"
-        android:gravity="left"
+        android:layout_height="@dimen/dp_100"
+        android:layout_margin="@dimen/dp_10"
         android:background="@drawable/background_rounded"
-        app:layout_constraintTop_toBottomOf="@id/noteContentTextView"
+        android:gravity="start"
+        android:inputType="textMultiLine"
+        android:textSize="@dimen/sp_16"
         app:layout_constraintStart_toStartOf="parent"
-        />
+        app:layout_constraintTop_toBottomOf="@id/noteContentTextView" />
 
     <Button
         android:id="@+id/saveButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Save Note"
-        android:layout_margin="20dp"
-        android:onClick="saveNote"
-        android:textColor="@android:color/white"
+        android:layout_margin="@dimen/dp_20"
         android:background="@drawable/background_rounded_button"
         android:backgroundTint="@color/colorPrimary"
-        app:layout_constraintStart_toStartOf="parent"
+        android:onClick="saveNote"
+        android:text="@string/save_note"
+        android:textColor="@android:color/white"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/noteContentEditText"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/noteContentEditText" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

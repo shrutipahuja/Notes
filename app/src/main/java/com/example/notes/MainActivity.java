@@ -15,10 +15,6 @@ import java.util.List;
  */
 
 public class MainActivity extends AppCompatActivity {
-//    Toolbar notesListToolbar;
-    RecyclerView notesListRecyclerView;
-    NotesAdapter noteAdapter;
-    List<Note> notes;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,16 +22,17 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         NotesDatabase notesDatabase = new NotesDatabase(this);
-        notes = notesDatabase.getNotes();
-        notesListRecyclerView = findViewById(R.id.notesListRecyclerView);
+        List<Note> notes = notesDatabase.getNotes();
+        RecyclerView notesListRecyclerView = findViewById(R.id.notesListRecyclerView);
         notesListRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        noteAdapter = new NotesAdapter(this, notes );
+        NotesAdapter noteAdapter = new NotesAdapter(this, notes);
         notesListRecyclerView.setAdapter(noteAdapter);
 
     }
 
     /**
      * onClick method for FAB on Notes List Screen
+     *
      * @param view View
      */
 

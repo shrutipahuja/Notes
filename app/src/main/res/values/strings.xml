@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">Notes</string>
+    <string name="time_for_a_new_note">Time for a new note!</string>
+    <string name="enter_the_title">Enter the title:</string>
+    <string name="save_note">Save Note</string>
+    <string name="enter_the_content">Enter the content:</string>
+    <string name="sticky_note_image">Sticky note image</string>
 </resources>

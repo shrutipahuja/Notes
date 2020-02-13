@@ -6,36 +6,25 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-  <!--  <androidx.appcompat.widget.Toolbar
-        android:id="@+id/notesListToolbar"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="@color/colorPrimary"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/> -->
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/notesListRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        app:layout_constraintStart_toStartOf="parent"
+        android:layout_margin="@dimen/dp_10"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/addNewNoteButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:backgroundTint="@color/colorPrimaryDark"
+        android:layout_margin="@dimen/dp_20"
         android:onClick="createNote"
-        android:layout_margin="20dp"
-        app:srcCompat="@android:drawable/ic_input_add"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:backgroundTint="@color/colorPrimaryDark"
         app:layout_constraintBottom_toBottomOf="parent"
-        />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@android:drawable/ic_input_add" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

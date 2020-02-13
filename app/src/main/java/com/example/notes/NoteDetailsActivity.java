@@ -5,15 +5,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.TextView;
-import android.widget.Toast;
 
 /**
  * Screen 3 - Note Details Screen allowing to display the details of a note
  */
 
 public class NoteDetailsActivity extends AppCompatActivity {
-
-    TextView titleDetailsTextView, contentDetailsTextView, dateDetailsTextView, timeDetailsTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,12 +22,11 @@ public class NoteDetailsActivity extends AppCompatActivity {
 
         NotesDatabase notesDatabase = new NotesDatabase(this);
         Note note = notesDatabase.getNote(id);
-        Toast.makeText(this, note.getTitle(), Toast.LENGTH_LONG).show();
 
-        titleDetailsTextView = findViewById(R.id.titleDetailsTextView);
-        contentDetailsTextView = findViewById(R.id.contentDetailsTextView);
-        dateDetailsTextView = findViewById(R.id.dateDetailsTextView);
-        timeDetailsTextView = findViewById(R.id.timeDetailsTextView);
+        TextView titleDetailsTextView = findViewById(R.id.titleDetailsTextView);
+        TextView contentDetailsTextView = findViewById(R.id.contentDetailsTextView);
+        TextView dateDetailsTextView = findViewById(R.id.dateDetailsTextView);
+        TextView timeDetailsTextView = findViewById(R.id.timeDetailsTextView);
 
         //setting the text values of title, content, date and time
         titleDetailsTextView.setText(note.getTitle());
