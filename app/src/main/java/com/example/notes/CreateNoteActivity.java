@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ActionBar;
 import android.app.PendingIntent;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -29,21 +30,15 @@ public class CreateNoteActivity extends AppCompatActivity {
         setContentView(R.layout.activity_create_note);
 
         noteTitleEditText = findViewById(R.id.noteTitleEditText);
-//        noteTitleEditText.setSelection(1);
         noteContentEditText = findViewById(R.id.noteContentEditText);
-//        noteContentEditText.setSelection(1);
         saveButton = findViewById(R.id.saveButton);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        noteTitle = noteTitleEditText.getText().toString();
-        noteContent = noteContentEditText.getText().toString();
 
         //get current year, month, date
         calendar = Calendar.getInstance();
         currentDate = calendar.get(Calendar.YEAR) + "/" + (calendar.get(Calendar.MONTH) + 1) + "/" + calendar.get(Calendar.DAY_OF_MONTH);
         currentTime = padding(calendar.get(Calendar.HOUR_OF_DAY)) + ":" + padding(calendar.get(Calendar.MINUTE));
-
-        //Log.i("DATE AND TIME", currentDate + "   " + currentTime);
     }
 
     /**
@@ -63,20 +58,25 @@ public class CreateNoteActivity extends AppCompatActivity {
      */
 
     public void saveNote(View view) {
-        if(noteTitle!=null && noteContent!=null) {
+        noteTitle = noteTitleEditText.getText().toString();
+        noteContent = noteContentEditText.getText().toString();
+
+        if (noteTitle.isEmpty() ) {
+            Toast.makeText(this, "Title cannot be blank", Toast.LENGTH_LONG).show();
+        } else if (noteContent.isEmpty()) {
+            Toast.makeText(this, "Content cannot be blank", Toast.LENGTH_LONG).show();
+        } else {
             Note note = new Note(noteTitle, noteContent, currentDate, currentTime);
             NotesDatabase notesDatabase = new NotesDatabase(this);
             notesDatabase.addNoteToDatabase(note);
             Log.i("Button pressed", "Save Button");
-            saveButton.setEnabled(true);
-        } else if (noteTitle==null) {
-            saveButton.setEnabled(false);
-            Toast.makeText(this, "Note Title cannot be empty", Toast.LENGTH_LONG).show();
-        } else if (noteContent==null) {
-            saveButton.setEnabled(false);
-            Toast.makeText(this, "Note Title cannot be empty", Toast.LENGTH_LONG).show();
+            goToMain();
         }
-        onBackPressed();
+    }
+
+    private void goToMain() {
+        Intent goToMainIntent = new Intent(this, MainActivity.class);
+        startActivity(goToMainIntent);
     }
 
     @Override

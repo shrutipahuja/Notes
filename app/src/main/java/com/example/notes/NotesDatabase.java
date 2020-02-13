@@ -24,8 +24,8 @@ public class NotesDatabase extends SQLiteOpenHelper {
 
     //Initital Database Version, Database Name, Database Table
     private static int DATABASE_VERSION = 2;
-    private static final String DATABASE_NAME = "NotesDB";
-    private static final String DATABASE_TABLE = "NotesTable";
+    private static final String DATABASE_NAME = "NotesDBMS";
+    private static final String DATABASE_TABLE = "NotesTableDBMS";
 
     //Column Names for the Database Table NotesTable
     private static final String KEY_ID = "id";
@@ -90,7 +90,7 @@ public class NotesDatabase extends SQLiteOpenHelper {
         return ID;
     }
 
-    public  Note getNote(long id) {
+    public Note getNote(long id) {
         //select * from DATABASE_NAME where id =
         SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
         Cursor cursor = sqLiteDatabase.query(DATABASE_TABLE, new String[] { KEY_ID, KEY_TITLE, KEY_CONTENT, KEY_DATE, KEY_TIME},
@@ -110,7 +110,7 @@ public class NotesDatabase extends SQLiteOpenHelper {
 
         String query = "SELECT * FROM " + DATABASE_TABLE;
         Cursor cursor = sqLiteDatabase.rawQuery(query, null);
-        if(cursor!=null) {
+        if(cursor.moveToFirst()) {
             do {
                 Note note = new Note();
                 note.setId(cursor.getLong(0));
@@ -118,6 +118,7 @@ public class NotesDatabase extends SQLiteOpenHelper {
                 note.setContent(cursor.getString(2));
                 note.setDate(cursor.getString(3));
                 note.setTime(cursor.getString(4));
+                listOfNotes.add(note);
             }while(cursor.moveToNext());
         }
                 return listOfNotes;
