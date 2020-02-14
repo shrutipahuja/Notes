@@ -34,7 +34,7 @@ Import the project from GitHub using File -> New -> Project from Version Control
 
 It will ask for a base directory, normally AndroidStudioProjects, you can change it to your preference.
 
-After this the Open Note Scanner can be built.
+After this the Notes app can be built.
 
 
 
