@@ -6,6 +6,7 @@ A note has a title, content and is stamped with the current date and time.
 Notes has three screens:
 
 Screen 1: Notes List Screen
+
 https://user-images.githubusercontent.com/60269503/74525403-085ff480-4f47-11ea-9d47-763346a18297.png
 
 This screen displays the notes created in a reverse chronological order where the latest note is displayed first. Each note has the title, content and the timestamp.
