@@ -5,4 +5,6 @@
     <string name="save_note">Save Note</string>
     <string name="enter_the_content">Enter the content:</string>
     <string name="sticky_note_image">Sticky note image</string>
+    <string name="title_blank">Title cannot be blank</string>
+    <string name="content_blank">Content cannot be blank</string>
 </resources>

@@ -52,9 +52,9 @@ public class CreateNoteActivity extends AppCompatActivity {
         String noteContent = noteContentEditText.getText().toString();
 
         if (noteTitle.isEmpty()) {
-            Toast.makeText(this, "Title cannot be blank", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, this.getString(R.string.title_blank), Toast.LENGTH_LONG).show();
         } else if (noteContent.isEmpty()) {
-            Toast.makeText(this, "Content cannot be blank", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, this.getString(R.string.content_blank), Toast.LENGTH_LONG).show();
         } else {
             Note note = new Note(noteTitle, noteContent, currentDate, currentTime);
             NotesDatabase notesDatabase = new NotesDatabase(this);
