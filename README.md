@@ -1,5 +1,5 @@
 # Notes
-This little application can be used to take down notes and store them in memory from where they can be easily accessed.
+This little application can be used to take down notes and store them in memory using an SQLiteDatabase from where they can be easily accessed. 
 
 A note has a title, content and is stamped with the current date and time.
 
@@ -35,6 +35,8 @@ Import the project from GitHub using File -> New -> Project from Version Control
 It will ask for a base directory, normally AndroidStudioProjects, you can change it to your preference.
 
 After this the Notes app can be built.
+
+(To create a new database of notes, simply change the database name and table name in the NotesDatabase class. Uninstalling and installing the application will also delete the database.)
 
 
 
