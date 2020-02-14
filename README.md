@@ -27,8 +27,10 @@ This screen is launched either when the user creates a new note and saves it or 
 This is a static screen which displays the note title, note content and the time stamp when the note was created.
 
 <b>Instructions for building</b>
+
 <i>Android Studio</i>
-Import the project from GitHub using File -> New -> Project from Version Control -> GitHub, fill the URL https://github.com/ctodobom/OpenNoteScanner.git
+
+Import the project from GitHub using File -> New -> Project from Version Control -> GitHub, fill the URL https://github.com/shrutipahuja/Notes.git
 
 It will ask for a base directory, normally AndroidStudioProjects, you can change it to your preference.
 
